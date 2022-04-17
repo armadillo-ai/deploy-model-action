@@ -1,5 +1,6 @@
 import core from "@actions/core";
 import github from "@actions/github";
+import axios from "axios";
 
 const armadilloUrls = {
   'PROD': 'https://www.witharmadillo.com/',
@@ -35,7 +36,18 @@ try {
   }
 
   const baseUrl = armadilloUrls[environment];
-  const fullUrl = `${baseUrl}`;
+  const fullUrl = `${baseUrl}/api/github/modelDeployment`;
+  axios.post(fullUrl, {
+    cloudRunUrl,
+    modelId,
+    commitHash,
+  }, {
+    headers: {
+      "ARMADILLO-GITHUB-SECRET": armadilloGithubSecret,
+    }
+  })
+    .then(res => console.log(res.data))
+    .catch(err => console.log(err));
 
 
 } catch (error) {
