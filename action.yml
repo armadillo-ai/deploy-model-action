@@ -1,0 +1,22 @@
+name: 'Deploy Model to Armadillo'
+description: 'Notifies the Armadillo platform that a model has been succesfully deployed by Google Cloud Run.'
+inputs:
+  cloud-run-url:
+    description: 'The URL that the model has been deployed to.'
+    required: true
+  model-id:
+    description: 'The ID of the model. (This is always the same as the name of the repo).'
+    required: true
+  commit-hash:
+    description: 'The hash of the commit that this deploy corresponds to.'
+    required: true
+  environment:
+    description: 'Which environment to send the request to. Defaults to PROD, also accepts DEV.'
+    required: false
+    default: 'PROD'
+outputs:
+  status:
+    description: 'Whether or not the deploy was successful. Two possible values: SUCCESS, ERROR.'
+runs:
+  using: 'node16'
+  main: 'index.js'
