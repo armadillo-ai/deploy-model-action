@@ -3,7 +3,9 @@ import github from "@actions/github";
 import axios from "axios";
 
 const armadilloUrls = {
-  'PROD': 'https://www.witharmadillo.com/',
+  // Temporarily switching for demo.
+  'PROD': 'https://web-8f4xb352y-armadillo-ai.vercel.app/',
+  // 'PROD': 'https://www.witharmadillo.com/',
   'DEV': 'https://dev.witharmadillo.com/'
 }
 
