@@ -14,6 +14,10 @@ inputs:
     description: 'Which environment to send the request to. Defaults to PROD, also accepts DEV.'
     required: false
     default: 'PROD'
+  armadillo-github-secret:
+    description: 'The Armadillo Github secret, which gives permission to access Armadillo on Github's behalf.'
+    required: true
+  
 outputs:
   status:
     description: 'Whether or not the deploy was successful. Two possible values: SUCCESS, ERROR.'
