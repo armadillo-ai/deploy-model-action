@@ -35,17 +35,27 @@ jobs:
       contents: 'read'
       id-token: 'write'
     steps:
+    # First, check out the repository itself, because we deploy it from source
+    - id: 'checkout-repo'
+      uses: actions/checkout@v3
+    # Next, log into Google Cloud
     - id: 'auth'
       uses: 'google-github-actions/auth@v0'
       with:
         credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
         service_account: 'github-actions@armadillo-21120.iam.gserviceaccount.com'
+    # Deploy to Google Cloud Run from source
     - id: 'deploy'
       uses: 'google-github-actions/deploy-cloudrun@v0'
       with:
-        service: 'hello-cloud-run'
-        image: 'gcr.io/cloudrun/hello'
-  update-armadillo:
-    - name: 'Send API Request to Armadillo'
-      run: 'curl "${{ steps.deploy.outputs.url }}"'
+        service: 'model-${{ github.sha }}'
+        source: ./
+    # Tell Armadillo that the deploy succeeded
+    - id: 'update-armadillo'
+      uses: 'armadillo-ai/deploy-model-action@v0.5'
+      with:
+        cloud-run-url: '${{ steps.deploy.outputs.url }}'
+        model-id: '${{ github.repository }}'
+        commit-hash: '${{ github.sha }}'
+        secret: '${{ secrets.ARMADILLO_GITHUB_SECRET }}'
 ```

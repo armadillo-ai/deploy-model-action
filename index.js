@@ -11,7 +11,7 @@ try {
   const modelId = core.getInput("model-id");
   const commitHash = core.getInput("commit-hash");
   const environment = core.getInput("environment")
-  const armadilloGithubSecret = core.getInput("armadillo-github-secret")
+  const armadilloGithubSecret = core.getInput("secret")
 
   console.log({
     cloudRunUrl,
