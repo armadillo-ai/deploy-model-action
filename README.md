@@ -45,10 +45,7 @@ jobs:
       with:
         service: 'hello-cloud-run'
         image: 'gcr.io/cloudrun/hello'
-    - id: 'update-armadillo'
-      uses: 'armadillo-ai/deploy-model-action'
-      with:
-        cloud-run-url: '${{ steps.deploy.outputs.url }}'
-        model-id: '${{ github.repository }}'
-        commit-hash: '${{ github.sha }}'
+  update-armadillo:
+    - name: 'Send API Request to Armadillo'
+      run: 'curl "${{ steps.deploy.outputs.url }}"'
 ```
