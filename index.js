@@ -4,7 +4,7 @@ import axios from "axios";
 
 const armadilloUrls = {
   // Temporarily switching for demo.
-  'PROD': 'https://web-8f4xb352y-armadillo-ai.vercel.app/',
+  'PROD': 'http://web-git-ml-models-armadillo-ai.vercel.app/',
   // 'PROD': 'https://www.witharmadillo.com/',
   'DEV': 'https://dev.witharmadillo.com/'
 }
