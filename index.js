@@ -15,6 +15,7 @@ try {
   const commitHash = core.getInput("commit-hash");
   const environment = core.getInput("environment")
   const armadilloGithubSecret = core.getInput("secret")
+  const status = core.getInput("status")
 
   console.log({
     cloudRunUrl,
@@ -22,6 +23,7 @@ try {
     commitHash,
     environment,
     armadilloGithubSecret,
+    status,
   })
 
   // Example Output:
@@ -31,6 +33,7 @@ try {
   //   commitHash: '7082e3d73ba5d0790a5761439de5cfa6a7c24f17',
   //   environment: 'PROD'
   //   armadilloGithubSecret: '<<REDACTED>>'
+  //   status: 'SUCCESS,
   // }
 
   if (!armadilloUrls.hasOwnProperty(environment)) {
@@ -43,6 +46,7 @@ try {
     cloudRunUrl,
     modelId,
     commitHash,
+    status,
   }, {
     headers: {
       "ARMADILLO-GITHUB-SECRET": armadilloGithubSecret,
